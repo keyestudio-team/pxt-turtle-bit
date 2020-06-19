@@ -1,7 +1,7 @@
 {
     "name": "pxt-turtle-bit",
     "version": "0.0.0",
-    "description": "turtle-bit for microbit",
+    "description": "keyestudio turtle-bit for microbit",
     "dependencies": {
         "core": "*",
         "neopixel": "github:mworkfun/pxt-neopixel-bluetooth",
