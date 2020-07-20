@@ -34,6 +34,11 @@ enum MD {
     Back = 1
 }
 
+enum LT {
+    Left,
+    Center,
+    Right
+}
 //% color="#ff6800" icon="\uf1b9" weight=15
 //% groups="['Motor', 'RGB-led', 'Neo-pixel', 'Sensor', 'Tone']"
 namespace turtleBit {
@@ -394,17 +399,21 @@ namespace turtleBit {
     }
 
     /////////////////////////////////////////////////////
-    /**
-     * return 0b001 or 0b010 or 0b100
-     * 0b001 is the sensor on the right
-     * 0b010 is the sensor on the middle
-     * ob100 is the sensor on the left
-     */
-    //% block="Line Tracking"
+    //% block="$lt Line Tracking"
     //% group="Sensor" weight=69
-    export function LineTracking(): number {
-        let val = pins.digitalReadPin(DigitalPin.P14) << 2 | pins.digitalReadPin(DigitalPin.P15)
-            << 1 | pins.digitalReadPin(DigitalPin.P16) << 0;
+    export function LineTracking(lt: LT): number {
+        let val;
+        switch(lt){
+            case LT.Left  :
+                val = pins.digitalReadPin(DigitalPin.P14);
+                break;
+            case LT.Center:
+                val = pins.digitalReadPin(DigitalPin.P15);
+                break;
+            case LT.Right :
+                val = pins.digitalReadPin(DigitalPin.P16);
+                break;
+        }
         return val;
     }
     /**
