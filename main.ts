@@ -16,18 +16,22 @@ enum RGBLED {
  * use for control motor
  */
 enum DIR {
-    run_forward = 0,
-    run_back = 1,
+    Run_forward = 0,
+    Run_back = 1,
     Turn_Left = 2,
     Turn_Right = 3
 }
 enum MOTOR {
-    A = 0,
-    B = 1
+    LeftSide = 0,
+    RightSide = 1
 }
 enum MotorState {
     stop = 0,
     brake = 1
+}
+enum MD {
+    Forward = 0,
+    Back = 1
 }
 
 //% color="#ff6800" icon="\uf1b9" weight=15
@@ -151,46 +155,10 @@ namespace turtleBit {
         }
     }
     /**
-     * set speed of motor
-     */
-    //% block="Motor $M speed: $speed \\%"
-    //% speed.min=-100 speed.max=100
-    //% group="Motor" weight=98
-    export function Motor(M: MOTOR, speed: number) {
-        if (!PCA9685_Initialized) {
-            init_PCA9685();
-        }
-        let speed_value = Math.map(speed, -100, 100, -4095, 4095);
-        if (M == 0 && speed >= 0) {
-            setPwm(0, 0, speed_value);  //control speed : 0---4095
-            setPwm(1, 0, 0);
-            setPwm(2, 0, 4095);
-        }
-        if (M == 0 && speed < 0) {
-            speed_value = Math.abs(speed_value);
-            setPwm(0, 0, speed_value);  //control speed : 0---4095
-            setPwm(1, 0, 4095);
-            setPwm(2, 0, 0);
-        }
-
-        if (M == 1 && speed >= 0) {
-            setPwm(5, 0, speed_value);  //control speed : 0---4095
-            setPwm(4, 0, 0);
-            setPwm(3, 0, 4095);
-        }
-        if (M == 1 && speed < 0) {
-            speed_value = Math.abs(speed_value);
-            setPwm(5, 0, speed_value);  //control speed : 0---4095
-            setPwm(4, 0, 4095);
-            setPwm(3, 0, 0);
-        }
-
-    }
-    /**
      * set cat state
      */
     //% block="car $sta"
-    //% group="Motor" weight=97
+    //% group="Motor" weight=98
     export function state(sta: MotorState) {
         //if (!PCA9685_Initialized) {
         //init_PCA9685();
@@ -215,9 +183,43 @@ namespace turtleBit {
         }
     }
     /**
+     * set speed of motor
+     */
+    //% block="$M motor run $D speed: $speed \\%"
+    //% speed.min=0 speed.max=100
+    //% group="Motor" weight=97
+    export function Motor(M: MOTOR, D: MD, speed: number) {
+        if (!PCA9685_Initialized) {
+            init_PCA9685();
+        }
+        let speed_value = Math.map(speed, 0, 100, 0, 4095);
+        if (M == 0 && D == 0) {
+            setPwm(0, 0, speed_value);  //control speed : 0---4095
+            setPwm(1, 0, 0);
+            setPwm(2, 0, 4095);
+        }
+        if (M == 0 && D == 1) {
+            setPwm(0, 0, speed_value);  //control speed : 0---4095
+            setPwm(1, 0, 4095);
+            setPwm(2, 0, 0);
+        }
+
+        if (M == 1 && D == 0) {
+            setPwm(5, 0, speed_value);  //control speed : 0---4095
+            setPwm(4, 0, 0);
+            setPwm(3, 0, 4095);
+        }
+        if (M == 1 && D == 1) {
+            setPwm(5, 0, speed_value);  //control speed : 0---4095
+            setPwm(4, 0, 4095);
+            setPwm(3, 0, 0);
+        }
+
+    }
+    /**
      * set motor state
      */
-    //% block="motor $M $act"
+    //% block="$M motor $act"
     //% speed.min=0 speed.max=100
     //% group="Motor" weight=96
     export function MotorSta(M: MOTOR, act: MotorState) {
