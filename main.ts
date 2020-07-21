@@ -142,8 +142,8 @@ namespace turtleBit {
                 break;
             case 2:  //turn left
                 setPwm(0, 0, speed_value);  //control speed : 0---4095
-                setPwm(1, 0, 0);
-                setPwm(2, 0, 500);
+                setPwm(1, 0, 4095);
+                setPwm(2, 0, 0);
                 setPwm(5, 0, speed_value);  //control speed : 0---4095
                 setPwm(4, 0, 0);
                 setPwm(3, 0, 4095);
@@ -153,8 +153,8 @@ namespace turtleBit {
                 setPwm(1, 0, 0);
                 setPwm(2, 0, 4095);
                 setPwm(5, 0, speed_value);  //control speed : 0---4095
-                setPwm(4, 0, 0);
-                setPwm(3, 0, 500);
+                setPwm(4, 0, 4095);
+                setPwm(3, 0, 0);
                 break;
             default: break;
         }
