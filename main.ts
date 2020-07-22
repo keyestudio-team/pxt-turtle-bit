@@ -401,7 +401,7 @@ namespace turtleBit {
     /////////////////////////////////////////////////////
     //% block="LineTracking"
     //% group="Sensor" weight=69
-    export function LineTracking(lt: LT): number {
+    export function LineTracking(): number {
         let val;
         /*switch(lt){
             case LT.Left  :
