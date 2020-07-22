@@ -402,7 +402,7 @@ namespace turtleBit {
     //% block="LineTracking"
     //% group="Sensor" weight=69
     export function LineTracking(): number {
-        let val;
+        let val = 0;
         /*switch(lt){
             case LT.Left  :
                 val = pins.digitalReadPin(DigitalPin.P14);
@@ -414,7 +414,9 @@ namespace turtleBit {
                 val = pins.digitalReadPin(DigitalPin.P16);
                 break;
         }*/
-        val = pins.digitalReadPin(DigitalPin.P14)<<2 + pins.digitalReadPin(DigitalPin.P15)<<1 + pins.digitalReadPin(DigitalPin.P16);
+        val = (pins.digitalReadPin(DigitalPin.P14)<<2) + 
+              (pins.digitalReadPin(DigitalPin.P15)<<1) +
+              (pins.digitalReadPin(DigitalPin.P16));
         return val;
     }
     /**
