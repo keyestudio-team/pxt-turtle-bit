@@ -8,10 +8,6 @@ enum COLOR {
     white,
     black
 }
-enum RGBLED {
-    left_side = 0,
-    right_side = 1
-}
 /**
  * use for control motor
  */
@@ -21,7 +17,7 @@ enum DIR {
     Turn_Left = 2,
     Turn_Right = 3
 }
-enum MOTOR {
+enum LR {
     LeftSide = 0,
     RightSide = 1
 }
@@ -47,19 +43,19 @@ namespace turtleBit {
      */
     const PCA9685_ADDRESS = 0x47;   //device address
     const MODE1 = 0x00;
-    const MODE2 = 0x01;
-    const SUBADR1 = 0x02;
-    const SUBADR2 = 0x03;
-    const SUBADR3 = 0x04;
+    //const MODE2 = 0x01;
+    //const SUBADR1 = 0x02;
+    //const SUBADR2 = 0x03;
+    //const SUBADR3 = 0x04;
     const PRESCALE = 0xFE;
     const LED0_ON_L = 0x06;
     const LED0_ON_H = 0x07;
     const LED0_OFF_L = 0x08;
-    const LED0_OFF_H = 0x09;
-    const ALL_LED_ON_L = 0xFA;
-    const ALL_LED_ON_H = 0xFB;
-    const ALL_LED_OFF_L = 0xFC;
-    const ALL_LED_OFF_H = 0xFD;
+    //const LED0_OFF_H = 0x09;
+    //const ALL_LED_ON_L = 0xFA;
+    //const ALL_LED_ON_H = 0xFB;
+    //const ALL_LED_OFF_L = 0xFC;
+    //const ALL_LED_OFF_H = 0xFD;
 
     let PCA9685_Initialized = false
 
@@ -193,7 +189,7 @@ namespace turtleBit {
     //% block="$M motor run $D speed: $speed \\%"
     //% speed.min=0 speed.max=100
     //% group="Motor" weight=97
-    export function Motor(M: MOTOR, D: MD, speed: number) {
+    export function Motor(M: LR, D: MD, speed: number) {
         if (!PCA9685_Initialized) {
             init_PCA9685();
         }
@@ -227,7 +223,7 @@ namespace turtleBit {
     //% block="$M motor $act"
     //% speed.min=0 speed.max=100
     //% group="Motor" weight=96
-    export function MotorSta(M: MOTOR, act: MotorState) {
+    export function MotorSta(M: LR, act: MotorState) {
         if (!PCA9685_Initialized) {
             init_PCA9685();
         }
@@ -254,29 +250,7 @@ namespace turtleBit {
             setPwm(3, 0, 4095);
         }
     }
-    /** 
-    /////////////////////////////////////////////////////
-    //% block="pixels brightness $br"
-    //% group="Neo-pixel" weight=89
-    export function brightness(br: number) {
-    }
-    //% block="pixels show color $col"
-    //% group="Neo-pixel" weight=88
-    export function Pixel(col: COLOR) {
-    }
-    //% block="pixels show color R:$red G:$green B:$blue"
-    //% group="Neo-pixel" weight=87
-    export function SetPixel(red: number, green: number, blue: number) {
-    }
-    //% block="set pixel color $pixel R:$red G:$green B:$blue"
-    //% group="Neo-pixel" weight=86
-    export function numPixel(pixel: number, red: number, green: number, blue: number) {
-    }
-    //% block="pixels clear"
-    //% group="Neo-pixel" weight=86
-    export function PixelClear() {
-    }
-    */
+
     /////////////////////////////////////////////////////
     /**
      * set rgb-led brightness
@@ -296,7 +270,7 @@ namespace turtleBit {
      */
     //% block="set $RgbLed RGBled $col"
     //% group="RGB-led" weight=78
-    export function Led(RgbLed: RGBLED, col: COLOR) {
+    export function Led(RgbLed: LR, col: COLOR) {
         if (!PCA9685_Initialized) {
             init_PCA9685();
         }
@@ -363,7 +337,7 @@ namespace turtleBit {
     //% block=" set RGBled $RgbLed R:$red G:$green B:$blue"
     //% red.min=0 red.max=255 green.min=0 green.max=255 blue.min=0 blue.max=255
     //% group="RGB-led" weight=77
-    export function SetLed(RgbLed: RGBLED, red: number, green: number, blue: number) {
+    export function SetLed(RgbLed: LR, red: number, green: number, blue: number) {
         if (!PCA9685_Initialized) {
             init_PCA9685();
         }
@@ -422,22 +396,20 @@ namespace turtleBit {
     /**
      * Ultrasonic sensor
      */
-    const TRIG_PIN = DigitalPin.P1;
-    const ECHO_PIN = DigitalPin.P2;
     let lastTime = 0;
     //% block="Ultrasonic"
     //% group="Sensor" weight=68
     export function ultra(): number {
         //send trig pulse
-        pins.setPull(TRIG_PIN, PinPullMode.PullNone);
-        pins.digitalWritePin(TRIG_PIN, 0)
+        pins.setPull(DigitalPin.P1, PinPullMode.PullNone);
+        pins.digitalWritePin(DigitalPin.P1, 0)
         control.waitMicros(2);
-        pins.digitalWritePin(TRIG_PIN, 1)
+        pins.digitalWritePin(DigitalPin.P1, 1)
         control.waitMicros(10);
-        pins.digitalWritePin(TRIG_PIN, 0)
+        pins.digitalWritePin(DigitalPin.P1, 0)
 
         // read echo pulse  max distance : 6m(35000us)  
-        let t = pins.pulseIn(ECHO_PIN, PulseValue.High, 35000);
+        let t = pins.pulseIn(DigitalPin.P2, PulseValue.High, 35000);
         let ret = t;
 
         //Eliminate the occasional bad data
