@@ -175,12 +175,12 @@ namespace turtleBit {
         }
 
         if (sta == 1) {           //brake
-            setPwm(0, 0, 4095);  //control speed : 0---4095
-            setPwm(1, 0, 4095);
-            setPwm(2, 0, 4095);
-            setPwm(5, 0, 4095);  //control speed : 0---4095
-            setPwm(4, 0, 4095);
-            setPwm(3, 0, 4095);
+            setPwm(0, 0, 0);  //control speed : 0---4095
+            //setPwm(1, 0, 4095);
+            //setPwm(2, 0, 4095);
+            setPwm(5, 0, 0);  //control speed : 0---4095
+            //setPwm(4, 0, 4095);
+            //setPwm(3, 0, 4095);
         }
     }
     /**
@@ -234,9 +234,9 @@ namespace turtleBit {
             setPwm(2, 0, 0);
         }
         if (M == 0 && act == 1) {           //brake
-            setPwm(0, 0, 4095);  //control speed : 0---4095
-            setPwm(1, 0, 4095);
-            setPwm(2, 0, 4095);
+            setPwm(0, 0, 0);  //control speed : 0---4095
+            //setPwm(1, 0, 4095);
+            //setPwm(2, 0, 4095);
         }
 
         if (M == 1 && act == 0) {           //stop
@@ -245,9 +245,9 @@ namespace turtleBit {
             setPwm(3, 0, 0);
         }
         if (M == 1 && act == 1) {           //brake
-            setPwm(5, 0, 4095);  //control speed : 0---4095
-            setPwm(4, 0, 4095);
-            setPwm(3, 0, 4095);
+            setPwm(5, 0, 0);  //control speed : 0---4095
+            //setPwm(4, 0, 4095);
+            //setPwm(3, 0, 4095);
         }
     }
 
@@ -276,19 +276,16 @@ namespace turtleBit {
         }
 
         if (RgbLed == 0) {    //left side RGB_LED
+            setPwm(9, 0, 0);
+            setPwm(10, 0, 0);
+            setPwm(11, 0, 0);
             if (col == COLOR.red) {
                 setPwm(9, 0, L_brightness);
-                setPwm(10, 0, 0);
-                setPwm(11, 0, 0);
             }
             if (col == COLOR.green) {
-                setPwm(9, 0, 0);
                 setPwm(10, 0, L_brightness);
-                setPwm(11, 0, 0);
             }
             if (col == COLOR.blue) {
-                setPwm(9, 0, 0);
-                setPwm(10, 0, 0);
                 setPwm(11, 0, L_brightness);
             }
             if (col == COLOR.white) {
@@ -297,26 +294,20 @@ namespace turtleBit {
                 setPwm(11, 0, L_brightness);
             }
             if (col == COLOR.black) {
-                setPwm(9, 0, 0);
-                setPwm(10, 0, 0);
-                setPwm(11, 0, 0);
             }
         }
 
         if (RgbLed == 1) {    //right side RGB_LED
+            setPwm(6, 0, 0);
+            setPwm(7, 0, 0);
+            setPwm(8, 0, 0);
             if (col == COLOR.red) {
-                setPwm(6, 0, 0);
                 setPwm(7, 0, L_brightness);
-                setPwm(8, 0, 0);
             }
             if (col == COLOR.green) {
                 setPwm(6, 0, L_brightness);
-                setPwm(7, 0, 0);
-                setPwm(8, 0, 0);
             }
             if (col == COLOR.blue) {
-                setPwm(6, 0, 0);
-                setPwm(7, 0, 0);
                 setPwm(8, 0, L_brightness);
             }
             if (col == COLOR.white) {
@@ -325,9 +316,6 @@ namespace turtleBit {
                 setPwm(8, 0, L_brightness);
             }
             if (col == COLOR.black) {
-                setPwm(6, 0, 0);
-                setPwm(7, 0, 0);
-                setPwm(8, 0, 0);
             }
         }
     }
