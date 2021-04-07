@@ -1,0 +1,31 @@
+{
+    "name": "pxt-turtle-bit",
+    "version": "0.0.0",
+    "description": "keyestudio turtle-bit for microbit",
+    "dependencies": {
+        "core": "*",
+        "neopixel": "github:mworkfun/pxt-neopixel-bluetooth",
+        "pxt-ir-remote": "github:mworkfun/pxt-ir-remote#d38780f97e1703f099aa5c06e40966968fa15235",
+        "microphone": "*"
+    },
+    "files": [
+        "README.md",
+        "main.ts",
+        "NecIR.cpp",
+        "shims.d.ts",
+        "enums.d.ts",
+        "ReceiverIR.cpp",
+        "ReceiverIR.h",
+        "RemoteIR.h",
+        "TransmitterIR.cpp",
+        "TransmitterIR.h"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "tsprj"
+}
