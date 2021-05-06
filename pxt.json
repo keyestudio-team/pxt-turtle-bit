@@ -5,7 +5,7 @@
     "dependencies": {
         "core": "*",
         "neopixel": "github:mworkfun/pxt-neopixel-bluetooth",
-        "pxt-ir-remote": "github:keyestudio2019/pxt-RI-receiver",
+        "pxt-ir-remote": "github:keyestudio-team/pxt-RI-receiver",
         "microphone": "*"
     },
     "files": [
